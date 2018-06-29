@@ -64,6 +64,7 @@
             android:textStyle="bold"
             android:maxLines="1"
             android:paddingEnd="15dp"
+            android:textColor="@color/magicPurple"
             />
     </android.support.design.widget.TextInputLayout>
 
@@ -93,7 +94,8 @@
             android:textStyle="bold"
             android:maxLines="1"
             android:paddingEnd="15dp"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:textColor="@color/magicPurple"/>
     </android.support.design.widget.TextInputLayout>
 
     <Button

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "yohan.jkskingdom.com.jokesterskingdom"
-        minSdkVersion 18
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.1"
@@ -28,6 +28,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //noinspection GradleCompatible
     compile 'com.google.firebase:firebase-core:16.0.0'
+    compile 'com.google.firebase:firebase-auth:16.0.2'
     implementation 'com.android.support:design:27.1.1'
 }
 

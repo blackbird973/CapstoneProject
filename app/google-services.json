@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "854776128755-fk7up5o9eoffpcgrm9f08esd6fv4dg63.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "yohan.jkskingdom.com.jokesterskingdom",
+            "certificate_hash": "c3cb51f3e53dbf5ffb3a28d7c8b69d226d4a1f5f"
+          }
+        },
+        {
           "client_id": "854776128755-cl9mqljn8cjt73fhksasq5j8de9pifjt.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "854776128755-cl9mqljn8cjt73fhksasq5j8de9pifjt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
