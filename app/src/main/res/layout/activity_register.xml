@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="yohan.jkskingdom.com.jokesterskingdom.LoginActivity">
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="273dp"
+        android:layout_height="182dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/card_logo"
+        android:elevation="10dp"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="244dp"
+        android:layout_height="237dp"
+        android:layout_marginTop="8dp"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintVertical_bias="0.555"
+        app:srcCompat="@drawable/logo_app" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="270dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="8dp"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="1.0">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/custom_textinput"
+            android:fontFamily="@font/montserrat"
+            android:hint=" Email"
+            android:maxLines="1"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout2"
+        android:layout_width="270dp"
+        android:layout_height="70dp"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <android.support.design.widget.TextInputEditText
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/custom_textinput"
+            android:fontFamily="@font/montserrat"
+            android:hint=" Password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="270dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/custom_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="91dp"
+        android:layout_height="19dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:elevation="15dp"
+        android:fontFamily="@font/montserrat"
+        android:text="REGISTER"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintTop_toTopOf="@+id/button" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="392dp"
+        android:layout_height="211dp"
+        android:cropToPadding="true"
+        android:scaleType="fitXY"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/curve" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="269dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="5dp"
+        android:text="Already a King ? Login Here"
+        android:textAlignment="center"
+        android:textColor="#C3C3C3"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutName"
+        android:layout_width="270dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="264dp"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/custom_textinput"
+            android:fontFamily="@font/montserrat"
+            android:hint="Your King Name"
+            android:maxLines="1"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </android.support.design.widget.TextInputLayout>
+
+</android.support.constraint.ConstraintLayout>

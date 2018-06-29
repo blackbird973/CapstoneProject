@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "854776128755",
+    "firebase_url": "https://jokesterskingdom-4b2d1.firebaseio.com",
+    "project_id": "jokesterskingdom-4b2d1",
+    "storage_bucket": "jokesterskingdom-4b2d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:854776128755:android:2041b7144364f944",
+        "android_client_info": {
+          "package_name": "yohan.jkskingdom.com.jokesterskingdom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "854776128755-cl9mqljn8cjt73fhksasq5j8de9pifjt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWg0W3XXPs2lX4VkGgZflgo_NC0413zgs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
