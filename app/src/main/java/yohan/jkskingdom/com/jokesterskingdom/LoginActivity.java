@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,8 +30,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         auth = FirebaseAuth.getInstance();
-        inputEmail = (TextInputLayout) findViewById(R.id.textInputLayout);
-        inputPassword = (TextInputLayout) findViewById(R.id.textInputLayout2);
+        inputEmail = (TextInputLayout) findViewById(R.id.textInputLayout2);
+        inputPassword = (TextInputLayout) findViewById(R.id.textInputLayout3);
         btnLogin = (Button) findViewById(R.id.button);
         goToRegister = (TextView) findViewById(R.id.textView2);
 

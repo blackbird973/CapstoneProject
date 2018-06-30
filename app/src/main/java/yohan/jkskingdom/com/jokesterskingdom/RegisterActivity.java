@@ -7,7 +7,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +14,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 /**
@@ -28,14 +29,15 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView goToLogin;
     private FirebaseAuth auth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
         auth = FirebaseAuth.getInstance();
-        inputEmail = (TextInputLayout) findViewById(R.id.textInputLayout);
-        inputPassword = (TextInputLayout) findViewById(R.id.textInputLayout2);
+        inputEmail = (TextInputLayout) findViewById(R.id.textInputLayout2);
+        inputPassword = (TextInputLayout) findViewById(R.id.textInputLayout3);
         inputName = (TextInputLayout) findViewById(R.id.textInputLayoutName);
         btnRegister = (Button) findViewById(R.id.button);
         goToLogin = (TextView) findViewById(R.id.textView2);

@@ -38,12 +38,12 @@
         app:srcCompat="@drawable/logo_app" />
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/textInputLayout2"
         android:layout_width="270dp"
         android:layout_height="70dp"
         android:layout_marginTop="8dp"
         app:hintEnabled="false"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -65,7 +65,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout2"
+        android:id="@+id/textInputLayout3"
         android:layout_width="270dp"
         android:layout_height="70dp"
         app:hintEnabled="false"
@@ -138,7 +138,7 @@
         android:id="@+id/textView2"
         android:layout_width="269dp"
         android:layout_height="43dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:text="Already a King ? Login Here"
         android:textAlignment="center"
         android:textColor="#C3C3C3"
@@ -156,7 +156,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="20dp"
         app:hintEnabled="false"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -171,6 +171,7 @@
             android:maxLines="1"
             android:paddingEnd="15dp"
             android:paddingStart="15dp"
+            android:singleLine="false"
             android:textSize="15sp"
             android:textStyle="bold" />
     </android.support.design.widget.TextInputLayout>
