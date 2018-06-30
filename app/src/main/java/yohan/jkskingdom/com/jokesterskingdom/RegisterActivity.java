@@ -28,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnRegister;
     private TextView goToLogin;
     private FirebaseAuth auth;
+    DatabaseReference databaseReference;
 
 
     @Override
@@ -35,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        databaseReference = FirebaseDatabase.getInstance().getReference("user_account_settings");
         auth = FirebaseAuth.getInstance();
         inputEmail = (TextInputLayout) findViewById(R.id.textInputLayout2);
         inputPassword = (TextInputLayout) findViewById(R.id.textInputLayout3);
@@ -57,6 +59,12 @@ public class RegisterActivity extends AppCompatActivity {
 
                 String email = inputEmail.getEditText().getText().toString().trim();
                 String password = inputPassword.getEditText().getText().toString().trim();
+                String userName = inputName.getEditText().getText().toString().trim();
+
+                if (TextUtils.isEmpty(userName)) {
+                    Toast.makeText(getApplicationContext(), "Enter your name!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
@@ -86,19 +94,27 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
+
+                                    //ADD THE NAME IN THE DB
+                                    addUsername();
+
                                     startActivity(new Intent(RegisterActivity.this, JokesFeed.class));
                                     finish();
                                 }
                             }
                         });
 
-
-
-
-
             }
         });
 
+    }
+
+    public void addUsername(){
+        String userName = inputName.getEditText().getText().toString();
+        String id = databaseReference.push().getKey();
+
+        User user = new User(userName);
+        databaseReference.child(id).setValue(user);
 
     }
 

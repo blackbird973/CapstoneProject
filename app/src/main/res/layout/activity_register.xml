@@ -173,7 +173,9 @@
             android:paddingStart="15dp"
             android:singleLine="false"
             android:textSize="15sp"
-            android:textStyle="bold" />
-    </android.support.design.widget.TextInputLayout>
+            android:textStyle="bold"
+            android:maxLength="10"/>
+            <requestFocus />
+        </android.support.design.widget.TextInputLayout>
 
 </android.support.constraint.ConstraintLayout>
