@@ -1,5 +1,7 @@
 package yohan.jkskingdom.com.jokesterskingdom;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -43,6 +45,8 @@ public class RegisterActivity extends AppCompatActivity {
         inputName = (TextInputLayout) findViewById(R.id.textInputLayoutName);
         btnRegister = (Button) findViewById(R.id.button);
         goToLogin = (TextView) findViewById(R.id.textView2);
+
+
 
         //GO TO THE LOGIN ACTIVITY LAYOUT
         goToLogin.setOnClickListener(new View.OnClickListener() {
@@ -110,15 +114,22 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void addUsername(){
-        String userName = inputName.getEditText().getText().toString();
-        String id = databaseReference.push().getKey();
 
+        String userName = inputName.getEditText().getText().toString();
+        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         User user = new User(userName);
         databaseReference.child(id).setValue(user);
 
+
+
+
+
+
+
+
+
+
     }
-
-
 
 
 
