@@ -101,8 +101,12 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
                 firebaseFirestore.collection("Jokes").document(jokePostId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        //REPLACED position by getAdapterPsotion to have the realtime position and avoid the app crashes when the uses delete his last joke
+                        joke_list.remove(holder.getAdapterPosition());
+                        notifyItemRemoved(holder.getAdapterPosition());
+                        //REFRESH THE RECYCLERVIEW SO THAT THE DELETE JOKE ITEM DISAPEAR
+                        //notifyDataSetChanged();
 
-                        joke_list.remove(position);
 
 
                     }

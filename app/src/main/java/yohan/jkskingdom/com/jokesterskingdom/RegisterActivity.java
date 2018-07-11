@@ -109,9 +109,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 } else {
 
                                     //ADD THE NAME IN THE DB
-                                    Map<String , String> userMap = new HashMap<>();
+                                    Map<String , Object> userMap = new HashMap<>();
                                     userMap.put("username",username);
-                                    userMap.put("joke",null);
+
 
                                     firebaseFirestore.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override

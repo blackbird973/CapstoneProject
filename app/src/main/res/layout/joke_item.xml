@@ -72,6 +72,7 @@
                 android:fontFamily="@font/montserrat"
                 android:paddingEnd="8dp"
                 android:text="date"
+                android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_username" />
 
