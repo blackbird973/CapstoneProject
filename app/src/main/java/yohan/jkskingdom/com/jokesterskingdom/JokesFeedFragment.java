@@ -8,6 +8,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,12 @@ public class JokesFeedFragment extends Fragment  {
         jokeRecyclerAdapter = new JokeRecyclerAdapter(joke_list);
         mJokeList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mJokeList.setAdapter(jokeRecyclerAdapter);
+        //STAGERED THE RECYCLER VIEW (2 COLUMNS LIKE LEBONCOIN)
+        mJokeList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        StaggeredGridLayoutManager mStaggeredVerticalLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        mJokeList.setLayoutManager(mStaggeredVerticalLayoutManager);
+        //JUST REMOVE THE 3 LINES ABOVE IF YOU WANT TO RETURN BACK TO THE  SIMPLE ONE LINE PER ITEM DISPLAY
+
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         //ORDER JOKES POST BY MOST RECENT DATE

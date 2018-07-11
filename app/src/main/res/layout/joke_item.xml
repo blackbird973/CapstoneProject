@@ -25,7 +25,8 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/custom_jokeitem"
-            android:elevation="5dp">
+            android:elevation="5dp"
+            android:paddingEnd="8dp">
 
             <TextView
                 android:id="@+id/tv_joke"
@@ -35,6 +36,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/montserrat"
                 android:paddingRight="16dp"
                 android:text="This "
                 android:textStyle="bold"
@@ -54,60 +56,55 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
+                android:fontFamily="@font/montserrat"
                 android:paddingRight="16dp"
                 android:text="Ben Pasternak"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/joke_like_btn"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginRight="16dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/montserrat"
+                android:paddingEnd="8dp"
                 android:text="date"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                app:layout_constraintStart_toStartOf="@+id/tv_username" />
 
             <ImageView
                 android:id="@+id/joke_like_btn"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_date"
-                app:layout_constraintEnd_toStartOf="@+id/tv_date"
-                app:layout_constraintHorizontal_bias="0.964"
-                app:layout_constraintStart_toEndOf="@+id/tv_username"
-                app:layout_constraintTop_toTopOf="@+id/tv_date"
-                app:layout_constraintVertical_bias="0.0"
+                android:layout_width="25dp"
+                android:layout_height="16dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginEnd="10dp"
+                android:paddingEnd="8dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="@+id/joke_like_count"
+                app:layout_constraintEnd_toStartOf="@+id/delete_joke_btn"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/joke_like_count"
                 app:srcCompat="@mipmap/action_like_grey" />
 
             <TextView
                 android:id="@+id/joke_like_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="8dp"
+                android:fontFamily="@font/montserrat"
                 android:text="0"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/joke_like_btn"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/tv_username"
-                app:layout_constraintTop_toTopOf="@+id/joke_like_btn"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintBottom_toBottomOf="@+id/tv_date"
+                app:layout_constraintStart_toEndOf="@+id/tv_date" />
 
             <ImageView
                 android:id="@+id/delete_joke_btn"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginEnd="10dp"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/joke_like_btn"
-                app:layout_constraintEnd_toStartOf="@+id/joke_like_count"
-                app:layout_constraintTop_toTopOf="@+id/joke_like_btn"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@mipmap/action_delete_joke" />
         </android.support.constraint.ConstraintLayout>
 

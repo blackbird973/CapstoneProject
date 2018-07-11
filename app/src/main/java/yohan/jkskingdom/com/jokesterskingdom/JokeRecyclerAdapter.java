@@ -103,7 +103,7 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
                     public void onSuccess(Void aVoid) {
 
                         joke_list.remove(position);
-                        
+
 
                     }
                 });
