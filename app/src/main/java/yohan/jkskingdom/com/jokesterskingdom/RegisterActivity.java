@@ -18,6 +18,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -30,7 +34,11 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnRegister;
     private TextView goToLogin;
     private FirebaseAuth auth;
-    DatabaseReference databaseReference;
+    private FirebaseFirestore firebaseFirestore;
+
+
+
+
 
 
     @Override
@@ -38,8 +46,9 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("user_account_settings");
+
         auth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
         inputEmail = (TextInputLayout) findViewById(R.id.textInputLayout2);
         inputPassword = (TextInputLayout) findViewById(R.id.textInputLayout3);
         inputName = (TextInputLayout) findViewById(R.id.textInputLayoutName);
@@ -63,9 +72,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                 String email = inputEmail.getEditText().getText().toString().trim();
                 String password = inputPassword.getEditText().getText().toString().trim();
-                String userName = inputName.getEditText().getText().toString().trim();
+                final String username = inputName.getEditText().getText().toString().trim();
 
-                if (TextUtils.isEmpty(userName)) {
+                if (TextUtils.isEmpty(username)) {
                     Toast.makeText(getApplicationContext(), "Enter your name!", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -100,7 +109,18 @@ public class RegisterActivity extends AppCompatActivity {
                                 } else {
 
                                     //ADD THE NAME IN THE DB
-                                    addUsername();
+                                    Map<String , String> userMap = new HashMap<>();
+                                    userMap.put("username",username);
+                                    userMap.put("joke",null);
+
+                                    firebaseFirestore.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                            Toast.makeText(RegisterActivity.this, "The username has sucessfully been inserted in the db", Toast.LENGTH_LONG).show();
+
+                                        }
+                                    });
 
                                     startActivity(new Intent(RegisterActivity.this, JokesFeed.class));
                                     finish();
@@ -113,12 +133,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    public void addUsername(){
 
-        String userName = inputName.getEditText().getText().toString();
-        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        User user = new User(userName);
-        databaseReference.child(id).setValue(user);
 
 
 
@@ -133,4 +148,4 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-}
+
