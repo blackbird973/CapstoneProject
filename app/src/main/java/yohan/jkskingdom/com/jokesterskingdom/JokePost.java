@@ -5,7 +5,7 @@ import java.util.Date;
  * Created by Yohan on 30/06/2018.
  */
 
-public class JokePost {
+public class JokePost extends JokePostId{
 
     public  String user_id, joke, username;
     public Date timestamp;

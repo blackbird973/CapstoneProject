@@ -68,7 +68,9 @@ public class JokesFeedFragment extends Fragment  {
 
                         if (doc.getType() == DocumentChange.Type.ADDED) {
 
-                            JokePost jokePost = doc.getDocument().toObject(JokePost.class);
+                            String jokePostId = doc.getDocument().getId();
+
+                            JokePost jokePost = doc.getDocument().toObject(JokePost.class).withId(jokePostId);
                             joke_list.add(jokePost);
 
                             jokeRecyclerAdapter.notifyDataSetChanged();
