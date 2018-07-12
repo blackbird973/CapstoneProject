@@ -1,5 +1,6 @@
 package yohan.jkskingdom.com.jokesterskingdom;
 
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import android.app.AlertDialog;
+import android.widget.Toast;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Date;
@@ -99,19 +102,42 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
             public void onClick(View view) {
 
 
-                firebaseFirestore.collection("Jokes").document(jokePostId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                alertDialogBuilder.setMessage("\uD83D\uDE22 It was a funny joke, do you really want to remove it from the Kingdom \uD83C\uDFF0");
+                        alertDialogBuilder.setPositiveButton("yes",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    //IF THE USER CLICK YES, THEN THE JOKE IS DELETED
+                                    public void onClick(DialogInterface arg0, int arg1) {
+
+                                        firebaseFirestore.collection("Jokes").document(jokePostId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                //REPLACED position by getAdapterPsotion to have the realtime position and avoid the app crashes when the uses delete his last joke
+                                                joke_list.remove(holder.getAdapterPosition());
+                                                notifyItemRemoved(holder.getAdapterPosition());
+                                                //REFRESH THE RECYCLERVIEW SO THAT THE DELETE JOKE ITEM DISAPEAR
+                                                //notifyDataSetChanged();
+
+
+
+                                            }
+                                        });
+
+                                    }
+                                });
+
+                alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    //IF THE USER CLICK "NO" THE JOKE IS NOT DELETED
                     @Override
-                    public void onSuccess(Void aVoid) {
-                        //REPLACED position by getAdapterPsotion to have the realtime position and avoid the app crashes when the uses delete his last joke
-                        joke_list.remove(holder.getAdapterPosition());
-                        notifyItemRemoved(holder.getAdapterPosition());
-                        //REFRESH THE RECYCLERVIEW SO THAT THE DELETE JOKE ITEM DISAPEAR
-                        //notifyDataSetChanged();
-
-
+                    public void onClick(DialogInterface dialog, int which) {
 
                     }
                 });
+                //DISPLAY THE ALERT DIALOG
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
 
             }
         });
