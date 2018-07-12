@@ -82,7 +82,7 @@
                 android:id="@+id/joke_like_btn"
                 android:layout_width="25dp"
                 android:layout_height="16dp"
-                android:layout_marginBottom="2dp"
+                android:layout_marginBottom="3dp"
                 android:paddingEnd="8dp"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="@+id/joke_like_count"
@@ -93,8 +93,10 @@
                 android:id="@+id/joke_like_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:fontFamily="@font/montserrat"
                 android:text="0"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_date"
                 app:layout_constraintStart_toEndOf="@+id/tv_date" />
 
@@ -112,9 +114,9 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/banner_purple"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/croix_rouge_new" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/croix_rouge_v3" />
 
         </android.support.constraint.ConstraintLayout>
 
