@@ -19,7 +19,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-
+import android.app.AlertDialog;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Date;
@@ -97,6 +97,7 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
         holder.deleteJokeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
                 firebaseFirestore.collection("Jokes").document(jokePostId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -213,7 +214,7 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
             mview = itemView;
 
             jokeLikeBtn = mview.findViewById(R.id.joke_like_btn);
-            deleteJokeBtn = mview.findViewById(R.id.delete_joke_btn);
+            deleteJokeBtn = mview.findViewById(R.id.croix_btn);
         }
 
         public void setJokeText(String jokeText){

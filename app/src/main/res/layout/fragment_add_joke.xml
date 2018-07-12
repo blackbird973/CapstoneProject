@@ -38,7 +38,7 @@
             android:fontFamily="@font/montserrat"
             android:hint=" Write your best Jokester Joke..."
             android:minLines="5"
-            android:maxLines="10"
+            android:maxLines="5"
             android:gravity="top|left"
             android:padding="10dp"
             android:singleLine="false"

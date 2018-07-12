@@ -24,6 +24,8 @@
         </activity>
         <activity android:name=".RegisterActivity" android:screenOrientation="portrait"></activity>
 
+
+
         <activity android:name=".JokesFeed" android:screenOrientation="portrait"></activity>
 
         <meta-data
