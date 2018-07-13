@@ -9,11 +9,17 @@ import android.widget.RemoteViews;
  * Created by Yohan on 12/07/2018.
  */
 
+/**
+ * Implementation of App Widget functionality.
+ */
 public class WidgetProvider extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_provider);
+
+
+
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
@@ -31,6 +37,4 @@ public class WidgetProvider extends AppWidgetProvider {
     @Override
     public void onDisabled(Context context) {
     }
-
-
 }

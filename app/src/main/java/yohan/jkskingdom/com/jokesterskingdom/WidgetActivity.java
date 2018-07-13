@@ -1,33 +1,35 @@
 package yohan.jkskingdom.com.jokesterskingdom;
 
-import android.appwidget.AppWidgetManager;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.RemoteViews;
-import android.widget.Toast;
-
-import com.google.firebase.firestore.FirebaseFirestore;
-
 /**
- * Created by Yohan on 12/07/2018.
+ * Created by Yohan on 09/06/2018.
  */
 
-//THIS WIDGET ACTIVITY WILL RETRIEVE THE LAST JOKE FROM THE FIRESTORE DATABASE AND PUT IN IN THE WIDGET TEXTVIEW
+import android.appwidget.AppWidgetManager;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Parcelable;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.widget.RemoteViews;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class WidgetActivity extends AppCompatActivity {
 
+    private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
     private AppWidgetManager widgetManager;
     private RemoteViews views;
-    private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
-
-    private FirebaseFirestore firebaseFirestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        firebaseFirestore = FirebaseFirestore.getInstance();
+        setResult(RESULT_CANCELED);
+        setContentView(R.layout.widget_activity);
 
         widgetManager = AppWidgetManager.getInstance(this);
         views = new RemoteViews(this.getPackageName(), R.layout.widget_provider);
@@ -42,12 +44,12 @@ public class WidgetActivity extends AppCompatActivity {
             finish();
         }
 
-        //RETRIEVE THE JOKE DATA TO THE WIDGET TEXTVIEW
+
+        String lastjoke = getIntent().getStringExtra("VELO");
+        Log.d("la derniere valeur est:",String.valueOf(lastjoke));
 
 
-        String last_joke_retreive = getIntent().getStringExtra("EXTRA_ID");
-
-        views.setTextViewText(R.id.widget_joke,String.valueOf(last_joke_retreive));
+        views.setTextViewText(R.id.widget_joke, String.valueOf(lastjoke));
 
         widgetManager.updateAppWidget(mAppWidgetId, views);
         Intent resultValue = new Intent();
@@ -58,8 +60,22 @@ public class WidgetActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
 
     }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+    }
+
+
+
 
 
 

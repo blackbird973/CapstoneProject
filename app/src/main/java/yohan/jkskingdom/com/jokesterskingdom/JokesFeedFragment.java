@@ -37,7 +37,7 @@ public class JokesFeedFragment extends Fragment  {
     List<JokePost> joke_list;
     FirebaseFirestore firebaseFirestore;
     JokeRecyclerAdapter jokeRecyclerAdapter;
-    Button btn_widget;
+
 
 
 
@@ -49,29 +49,12 @@ public class JokesFeedFragment extends Fragment  {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_jokesfeed, container, false);
-        btn_widget = v.findViewById(R.id.btn_widget);
-        //RETRIEVE THE LAST POST AND SEND IN AS AN INTENT, THE "0" RETRIEVE THE FIRST ITEM OF THE POSITION
-
-
-        //WHEN THE BUTTON IS CLICKED, THE STRING IS SENT TO THE WIDGET
-        btn_widget.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String last_joke = "Trump";
-                Toast.makeText(getContext(),last_joke,Toast.LENGTH_SHORT).show();
-
-                Intent i = new Intent(getActivity().getBaseContext(), WidgetActivity.class);
-                i.putExtra("EXTRA_ID", last_joke);
-                startActivity(i);
-            }
-        });
-
-
-
 
 
         joke_list = new ArrayList<>();
+
+
+
         mJokeList=v.findViewById(R.id.joke_recycler_view);
 
         jokeRecyclerAdapter = new JokeRecyclerAdapter(joke_list);

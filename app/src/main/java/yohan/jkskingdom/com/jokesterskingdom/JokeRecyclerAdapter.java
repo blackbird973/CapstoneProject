@@ -65,6 +65,14 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
         context = parent.getContext();
 
 
+        //RETRIEVE THE LAST POST AND SEND IN AS AN INTENT, THE "0" RETRIEVE THE FIRST ITEM OF THE POSITION
+        //THE last_joke string is the string i want to send in the widget
+        String last_joke = joke_list.get(0).getJoke();
+        Toast.makeText(context,last_joke,Toast.LENGTH_SHORT).show();
+
+        //Intent i = new Intent(getActivity(), WidgetActivity.class);
+        //i.putExtra("VELO", last_joke);
+        //startActivity(i);
 
 
         return new ViewHolder(view);
