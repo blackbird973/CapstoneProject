@@ -42,7 +42,6 @@
                 android:paddingEnd="32dp"
 
                 android:text="This "
-                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/tv_username"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -62,6 +61,7 @@
                 android:paddingRight="16dp"
                 android:text="Ben Pasternak"
                 android:textColor="@color/magicPurple"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/joke_like_btn"
                 app:layout_constraintLeft_toLeftOf="parent"

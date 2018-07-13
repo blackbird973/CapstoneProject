@@ -1,6 +1,7 @@
 package yohan.jkskingdom.com.jokesterskingdom;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -62,6 +63,10 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
         firebaseAuth = FirebaseAuth.getInstance();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.joke_item, parent, false);
         context = parent.getContext();
+
+
+
+
         return new ViewHolder(view);
 
 
@@ -74,6 +79,7 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
 
 
 
+
         //RETRIEVE THE ID OF EACH POST FOR THE LIKE FEATURE
         final String jokePostId = joke_list.get(position).JokePostId;
         final String currentUserId = firebaseAuth.getCurrentUser().getUid();
@@ -81,6 +87,7 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
         //RETRIEVE THE JOKE TEXT
          final String joke_data = joke_list.get(position).getJoke();
          holder.setJokeText(joke_data);
+
          //RETRIEVE THE USERNAME TEXT
          String username_data = joke_list.get(position).getUsername();
          holder.setUsernameText(username_data);
@@ -100,6 +107,7 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
         holder.deleteJokeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
