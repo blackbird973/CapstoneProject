@@ -62,12 +62,12 @@ public class LoginActivity extends AppCompatActivity {
                  final String password = inputPassword.getEditText().getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.forget_mail, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.forget_password, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                                     if (password.length() < 6) {
                                         inputPassword.setError("Password too short.");
                                     } else {
-                                        Toast.makeText(LoginActivity.this, "Authentification failed.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, R.string.fail_authentication, Toast.LENGTH_SHORT).show();
                                     }
                                 } else {
                                     Intent intent = new Intent(LoginActivity.this, JokesFeed.class);

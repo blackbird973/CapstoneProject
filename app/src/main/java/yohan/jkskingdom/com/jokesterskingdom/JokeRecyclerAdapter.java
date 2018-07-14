@@ -77,7 +77,7 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
         holder.setJokeText(joke_data);
 
 
-        
+
         //AS WE HAVE RETRIEVE THE LAST JOKE
         //SO WE SAVE THIS on SharedPreferences
 
@@ -122,7 +122,7 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
             public void onClick(View view) {
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-                alertDialogBuilder.setMessage("\uD83D\uDE22 It was a funny joke, do you really want to remove it from the Kingdom \uD83C\uDFF0");
+                alertDialogBuilder.setMessage(R.string.alert_dialog_text);
                 alertDialogBuilder.setPositiveButton("yes",
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -136,7 +136,7 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
                                         joke_list.remove(holder.getAdapterPosition());
                                         notifyItemRemoved(holder.getAdapterPosition());
                                         //REFRESH THE RECYCLERVIEW SO THAT THE DELETE JOKE ITEM DISAPEAR
-                                        //notifyDataSetChanged();
+
                                     }
                                 });
 

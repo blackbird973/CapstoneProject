@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">JokestersKingdom</string>
+    <string name="contentDescription_login_image">big_logo_login</string>
+    <string name="hint_editText_login">Email</string>
+    <string name="hint_editText_login_pass">Password</string>
+    <string name="tv_login_button">LOGIN</string>
+    <string name="content_description_first_gradient">login_background_gradient</string>
+    <string name="tv_new_user">New to the Kingdom ? Register Here</string>
+    <string name="contentDescription_logo_register">big_logo_register</string>
+    <string name="hint_editText_register_mail">Email</string>
+    <string name="hint_editText_register_Pass">Password</string>
+    <string name="tv_register_button">REGISTER</string>
+    <string name="image_gradient_register">background_register_gradient</string>
+    <string name="tv_already_member">Already a King ? Login Here</string>
+    <string name="tv_username_register">Your King Name</string>
+    <string name="hint_editText_publishJoke">Write your best Jokester Joke...</string>
+    <string name="tv_button_publish_joke">Share your joke with the Kingdom !</string>
+    <string name="small_thick_icon_publish_joke">logo_thick_validate_button</string>
+    <string name="username_background_profile_fragment">profile_username_background</string>
+    <string name="tv_logout_profile_fragment">LOGOUT</string>
+    <string name="exemple_joke">This</string>
+    <string name="exemple_user_joke">Ben Pasternak</string>
+    <string name="exemple_date_joke">date</string>
+    <string name="heart_icon_like_joke">small_like_logo_heart</string>
+    <string name="exemple_like_count_joke">0</string>
+    <string name="joke_background_purple">purple_banner_joke_background</string>
+    <string name="image_delete_joke">image_close_logo_delete_joke</string>
+    <string name="widget_title">This is the last joke shared in the Kingdom 🏰</string>
+    <string name="exemple_widget_joke">Do you know why toto is blind ? Because he don\'t have sunglasses !</string>
+    <string name="alert_dialog_text">It was a funny joke, do you really want to remove it from the Kingdom</string>
+    <string name="forget_mail">Enter email address!</string>
+    <string name="forget_password">Enter password!</string>
+    <string name="password_short">Password too short, enter minimum 6 chars</string>
+    <string name="fail_authentication">Failed authentication</string>
+    <string name="username_inserted_in_db">The username has sucessfully been inserted in the db</string>
 </resources>

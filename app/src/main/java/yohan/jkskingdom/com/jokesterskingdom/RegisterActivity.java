@@ -49,11 +49,11 @@ public class RegisterActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
-        inputEmail = (TextInputLayout) findViewById(R.id.textInputLayout2);
-        inputPassword = (TextInputLayout) findViewById(R.id.textInputLayout3);
-        inputName = (TextInputLayout) findViewById(R.id.textInputLayoutName);
-        btnRegister = (Button) findViewById(R.id.button);
-        goToLogin = (TextView) findViewById(R.id.textView2);
+        inputEmail =  findViewById(R.id.textInputLayout2);
+        inputPassword =  findViewById(R.id.textInputLayout3);
+        inputName =  findViewById(R.id.textInputLayoutName);
+        btnRegister =  findViewById(R.id.button);
+        goToLogin =  findViewById(R.id.textView2);
 
 
 
@@ -80,17 +80,17 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.forget_mail, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.forget_password, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (password.length() < 6) {
-                    Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.password_short, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -117,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
 
-                                            Toast.makeText(RegisterActivity.this, "The username has sucessfully been inserted in the db", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(RegisterActivity.this, R.string.username_inserted_in_db, Toast.LENGTH_LONG).show();
 
                                         }
                                     });

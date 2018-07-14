@@ -13,6 +13,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="110dp"
+        android:contentDescription="@string/username_background_profile_fragment"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/custom_textinput" />
@@ -43,25 +44,11 @@
         android:layout_marginTop="110dp"
         android:background="@drawable/custom_button"
         android:fontFamily="@font/montserrat"
-        android:text="LOGOUT"
+        android:text="@string/tv_logout_profile_fragment"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="166dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/montserrat"
-        android:text="About Jokesters Kingdom"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:background="@drawable/custom_button"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_logout" />
 
 </android.support.constraint.ConstraintLayout>

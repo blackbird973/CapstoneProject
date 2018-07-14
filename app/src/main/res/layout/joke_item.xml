@@ -2,7 +2,6 @@
 
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/trailers_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -41,7 +40,7 @@
                 android:fontFamily="@font/montserrat"
                 android:paddingEnd="32dp"
 
-                android:text="This "
+                android:text="@string/exemple_joke"
                 app:layout_constraintBottom_toTopOf="@+id/tv_username"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -59,7 +58,7 @@
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/montserrat"
                 android:paddingRight="16dp"
-                android:text="Ben Pasternak"
+                android:text="@string/exemple_user_joke"
                 android:textColor="@color/magicPurple"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -74,7 +73,7 @@
                 android:layout_marginBottom="2dp"
                 android:fontFamily="@font/montserrat"
                 android:paddingEnd="8dp"
-                android:text="date"
+                android:text="@string/exemple_date_joke"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_username" />
 
@@ -83,6 +82,7 @@
                 android:layout_width="25dp"
                 android:layout_height="16dp"
                 android:layout_marginBottom="3dp"
+                android:contentDescription="@string/heart_icon_like_joke"
                 android:paddingEnd="8dp"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="@+id/joke_like_count"
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:fontFamily="@font/montserrat"
-                android:text="0"
+                android:text="@string/exemple_like_count_joke"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_date"
                 app:layout_constraintStart_toEndOf="@+id/tv_date" />
@@ -104,6 +104,7 @@
                 android:id="@+id/banner_purple"
                 android:layout_width="0dp"
                 android:layout_height="43dp"
+                android:contentDescription="@string/joke_background_purple"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -113,6 +114,7 @@
                 android:id="@+id/croix_btn"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:contentDescription="@string/image_delete_joke"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
