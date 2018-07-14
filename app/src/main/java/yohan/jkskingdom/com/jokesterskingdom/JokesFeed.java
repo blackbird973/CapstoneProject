@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 public class JokesFeed extends AppCompatActivity {
 
-    TextView t1;
+
     private FloatingActionButton fabAddJoke;
 
     @Override
@@ -28,6 +28,8 @@ public class JokesFeed extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         fabAddJoke = findViewById(R.id.floatingActionButton);
+
+
 
 
 

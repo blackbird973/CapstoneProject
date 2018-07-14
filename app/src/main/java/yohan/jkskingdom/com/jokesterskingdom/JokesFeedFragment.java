@@ -53,8 +53,6 @@ public class JokesFeedFragment extends Fragment  {
 
         joke_list = new ArrayList<>();
 
-
-
         mJokeList=v.findViewById(R.id.joke_recycler_view);
 
         jokeRecyclerAdapter = new JokeRecyclerAdapter(joke_list);

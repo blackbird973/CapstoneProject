@@ -1,16 +1,23 @@
 package yohan.jkskingdom.com.jokesterskingdom;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.text.format.DateFormat;
-import android.content.Context;
+import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -21,19 +28,11 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-import android.app.AlertDialog;
-import android.widget.Toast;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Date;
 import java.util.Map;
-
-import javax.annotation.Nullable;
-
-/**
- * Created by Yohan on 11/07/2018.
- */
 
 public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapter.ViewHolder> {
 
@@ -41,18 +40,11 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
     FirebaseAuth firebaseAuth;
 
 
-
     public List<JokePost> joke_list;
-
     public Context context;
-
-
     public JokeRecyclerAdapter(List<JokePost> joke_list){
 
         this.joke_list = joke_list;
-
-
-
     }
 
     @NonNull
@@ -64,42 +56,55 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.joke_item, parent, false);
         context = parent.getContext();
 
-
         //RETRIEVE THE LAST POST AND SEND IN AS AN INTENT, THE "0" RETRIEVE THE FIRST ITEM OF THE POSITION
-        //THE last_joke string is the string i want to send in the widget
-        String last_joke = joke_list.get(0).getJoke();
-        Toast.makeText(context,last_joke,Toast.LENGTH_SHORT).show();
-
-        //Intent i = new Intent(getActivity(), WidgetActivity.class);
-        //i.putExtra("VELO", last_joke);
-        //startActivity(i);
 
 
         return new ViewHolder(view);
-
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
-
-
-
-
-
         //RETRIEVE THE ID OF EACH POST FOR THE LIKE FEATURE
         final String jokePostId = joke_list.get(position).JokePostId;
         final String currentUserId = firebaseAuth.getCurrentUser().getUid();
 
-        //RETRIEVE THE JOKE TEXT
-         final String joke_data = joke_list.get(position).getJoke();
-         holder.setJokeText(joke_data);
+        //RETRIEVE THE LAST JOKE POSTED IN THE KINGDOM
+        final String last_joke = joke_list.get(0).getJoke();
 
-         //RETRIEVE THE USERNAME TEXT
-         String username_data = joke_list.get(position).getUsername();
-         holder.setUsernameText(username_data);
-         //RETRIEVE TIME OF THE POSTED JOKE
+        //RETRIEVE THE JOKE TEXT
+        final String joke_data = joke_list.get(position).getJoke();
+        holder.setJokeText(joke_data);
+
+
+        
+        //AS WE HAVE RETRIEVE THE LAST JOKE
+        //SO WE SAVE THIS on SharedPreferences
+
+        SharedPreferences preferences = context.getSharedPreferences("Jokes", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("Jokes", last_joke);
+        editor.apply();
+
+        //SAVING IS COMPLETE
+        //NOW REQUEST TO UPDATE THE WIDGET
+        Intent addressWidget = new Intent(context, WidgetProvider.class);
+        AppWidgetManager manager = AppWidgetManager.getInstance(context);
+        addressWidget.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+
+        int[] addressIDs = manager.getAppWidgetIds(new ComponentName(context,
+                WidgetProvider.class));
+
+        addressWidget.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, addressIDs);
+        context.sendBroadcast(addressWidget);
+
+
+
+
+        //RETRIEVE THE USERNAME TEXT
+        String username_data = joke_list.get(position).getUsername();
+        holder.setUsernameText(username_data);
+        //RETRIEVE TIME OF THE POSTED JOKE
         final long millisecond = joke_list.get(position).getTimestamp().getTime();
         String dateString = DateFormat.format("dd/MM/yyyy", new Date(millisecond)).toString();
         holder.setTime(dateString);
@@ -116,32 +121,27 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
             @Override
             public void onClick(View view) {
 
-
-
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 alertDialogBuilder.setMessage("\uD83D\uDE22 It was a funny joke, do you really want to remove it from the Kingdom \uD83C\uDFF0");
-                        alertDialogBuilder.setPositiveButton("yes",
-                                new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setPositiveButton("yes",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            //IF THE USER CLICK YES, THEN THE JOKE IS DELETED
+                            public void onClick(DialogInterface arg0, int arg1) {
+
+                                firebaseFirestore.collection("Jokes").document(jokePostId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
-                                    //IF THE USER CLICK YES, THEN THE JOKE IS DELETED
-                                    public void onClick(DialogInterface arg0, int arg1) {
-
-                                        firebaseFirestore.collection("Jokes").document(jokePostId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                //REPLACED position by getAdapterPsotion to have the realtime position and avoid the app crashes when the uses delete his last joke
-                                                joke_list.remove(holder.getAdapterPosition());
-                                                notifyItemRemoved(holder.getAdapterPosition());
-                                                //REFRESH THE RECYCLERVIEW SO THAT THE DELETE JOKE ITEM DISAPEAR
-                                                //notifyDataSetChanged();
-
-
-
-                                            }
-                                        });
-
+                                    public void onSuccess(Void aVoid) {
+                                        //REPLACED position by getAdapterPsotion to have the realtime position and avoid the app crashes when the uses delete his last joke
+                                        joke_list.remove(holder.getAdapterPosition());
+                                        notifyItemRemoved(holder.getAdapterPosition());
+                                        //REFRESH THE RECYCLERVIEW SO THAT THE DELETE JOKE ITEM DISAPEAR
+                                        //notifyDataSetChanged();
                                     }
                                 });
+
+                            }
+                        });
 
                 alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
                     //IF THE USER CLICK "NO" THE JOKE IS NOT DELETED
@@ -158,7 +158,6 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
             }
         });
 
-
         //COUNT LIKES
         firebaseFirestore.collection("Jokes").document(jokePostId).collection("Likes").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -166,16 +165,16 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
 
                 if(documentSnapshots != null) {
 
-                if(!documentSnapshots.isEmpty()){
+                    if(!documentSnapshots.isEmpty()){
 
-                    int count = documentSnapshots.size();
-                    holder.updateLikesCount(count);
+                        int count = documentSnapshots.size();
+                        holder.updateLikesCount(count);
 
-                } else {
+                    } else {
 
-                    holder.updateLikesCount(0);
+                        holder.updateLikesCount(0);
 
-                }}
+                    }}
 
             }
         });
@@ -188,15 +187,15 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
 
                 if(documentSnapshot != null) {
 
-                if(documentSnapshot.exists()){
+                    if(documentSnapshot.exists()){
 
-                    holder.jokeLikeBtn.setImageDrawable(context.getDrawable(R.mipmap.action_like_purple));
+                        holder.jokeLikeBtn.setImageDrawable(context.getDrawable(R.mipmap.action_like_purple));
 
-                } else {
+                    } else {
 
-                    holder.jokeLikeBtn.setImageDrawable(context.getDrawable(R.mipmap.action_like_grey));
+                        holder.jokeLikeBtn.setImageDrawable(context.getDrawable(R.mipmap.action_like_grey));
 
-                }}
+                    }}
 
             }
         });
@@ -220,16 +219,11 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
                             firebaseFirestore.collection("Jokes").document(jokePostId).collection("Likes").document(currentUserId).delete();
 
                         }
-
-
                     }
                 });
 
             }
         });
-
-
-
     }
 
     @Override
