@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.support.v4.app.Fragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -77,10 +77,7 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
         holder.setJokeText(joke_data);
 
 
-
-        //AS WE HAVE RETRIEVE THE LAST JOKE
-        //SO WE SAVE THIS on SharedPreferences
-
+        //SHARED PREFERENCES
         SharedPreferences preferences = context.getSharedPreferences("Jokes", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("Jokes", last_joke);
@@ -89,7 +86,7 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
         //SAVING IS COMPLETE
         //NOW REQUEST TO UPDATE THE WIDGET
         Intent addressWidget = new Intent(context, WidgetProvider.class);
-        AppWidgetManager manager = AppWidgetManager.getInstance(context);
+        final AppWidgetManager manager = AppWidgetManager.getInstance(context);
         addressWidget.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
 
         int[] addressIDs = manager.getAppWidgetIds(new ComponentName(context,
@@ -121,13 +118,15 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
             @Override
             public void onClick(View view) {
 
+
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 alertDialogBuilder.setMessage(R.string.alert_dialog_text);
-                alertDialogBuilder.setPositiveButton("yes",
+                alertDialogBuilder.setPositiveButton(R.string.alert_dialog_yes,
                         new DialogInterface.OnClickListener() {
                             @Override
                             //IF THE USER CLICK YES, THEN THE JOKE IS DELETED
                             public void onClick(DialogInterface arg0, int arg1) {
+
 
                                 firebaseFirestore.collection("Jokes").document(jokePostId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -135,7 +134,28 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
                                         //REPLACED position by getAdapterPsotion to have the realtime position and avoid the app crashes when the uses delete his last joke
                                         joke_list.remove(holder.getAdapterPosition());
                                         notifyItemRemoved(holder.getAdapterPosition());
+
+
                                         //REFRESH THE RECYCLERVIEW SO THAT THE DELETE JOKE ITEM DISAPEAR
+                                        final String last_joke_new = joke_list.get(0).getJoke();
+                                        
+                                        SharedPreferences preferences = context.getSharedPreferences("Jokes", Context.MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = preferences.edit();
+                                        editor.putString("Jokes", last_joke_new);
+                                        editor.apply();
+
+                                        //SAVING IS COMPLETE
+                                        //NOW REQUEST TO UPDATE THE WIDGET
+                                        Intent addressWidget = new Intent(context, WidgetProvider.class);
+                                        final AppWidgetManager manager = AppWidgetManager.getInstance(context);
+                                        addressWidget.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+
+                                        int[] addressIDs = manager.getAppWidgetIds(new ComponentName(context,
+                                                WidgetProvider.class));
+
+                                        addressWidget.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, addressIDs);
+                                        context.sendBroadcast(addressWidget);
+
 
                                     }
                                 });
@@ -143,7 +163,7 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
                             }
                         });
 
-                alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setNegativeButton(R.string.alert_dialog_no,new DialogInterface.OnClickListener() {
                     //IF THE USER CLICK "NO" THE JOKE IS NOT DELETED
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

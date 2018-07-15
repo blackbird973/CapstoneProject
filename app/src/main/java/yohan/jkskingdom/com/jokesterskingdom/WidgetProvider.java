@@ -38,6 +38,7 @@ public class WidgetProvider extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
+
         if (intent.getAction() != null && intent.getAction()
                 .equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
             Bundle extras = intent.getExtras();
@@ -45,6 +46,7 @@ public class WidgetProvider extends AppWidgetProvider {
                 int[] appWidgetIds = extras.getIntArray(AppWidgetManager.EXTRA_APPWIDGET_IDS);
                 if (appWidgetIds != null && appWidgetIds.length > 0) {
                     this.onUpdate(context, AppWidgetManager.getInstance(context), appWidgetIds);
+
                 }
             }
         }

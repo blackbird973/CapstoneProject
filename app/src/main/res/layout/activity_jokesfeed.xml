@@ -9,14 +9,14 @@
         android:id="@+id/imageView9"
         android:layout_width="0dp"
         android:layout_height="61dp"
-        android:contentDescription="top_logo_banner"
         android:elevation="10dp"
         android:scaleType="fitXY"
         android:visibility="visible"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/curve_fragment" />
+        app:srcCompat="@drawable/curve_fragment"
+        tools:ignore="ContentDescription"/>
 
     <View
         android:id="@+id/view2"
@@ -39,13 +39,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:contentDescription="small_top_logo"
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="@+id/view2"
         app:layout_constraintStart_toStartOf="@+id/view2"
         app:layout_constraintTop_toTopOf="@+id/view2"
-        app:srcCompat="@drawable/logo_ready" />
+        app:srcCompat="@drawable/logo_ready"
+        tools:ignore="ContentDescription"/>
 
     <FrameLayout
         android:id="@+id/fragment_container"
@@ -84,6 +84,7 @@
         android:layout_height="60dp"
         android:layout_marginBottom="25dp"
         android:clickable="true"
+        android:focusable="true"
         app:backgroundTint="@color/magicPurple"
         app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="@+id/bottomNavigationView"

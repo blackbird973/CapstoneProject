@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView goToLogin;
     private FirebaseAuth auth;
     private FirebaseFirestore firebaseFirestore;
-
+    CheckInternet checkInternet;
 
 
 
@@ -56,6 +57,8 @@ public class RegisterActivity extends AppCompatActivity {
         goToLogin =  findViewById(R.id.textView2);
 
 
+        //CHECK IF INTERNET WITH ASYNCTASK
+        checkInternetMethod();
 
         //GO TO THE LOGIN ACTIVITY LAYOUT
         goToLogin.setOnClickListener(new View.OnClickListener() {
@@ -75,22 +78,22 @@ public class RegisterActivity extends AppCompatActivity {
                 final String username = inputName.getEditText().getText().toString().trim();
 
                 if (TextUtils.isEmpty(username)) {
-                    Toast.makeText(getApplicationContext(), "Enter your name!", Toast.LENGTH_SHORT).show();
+                    StyleableToast.makeText(getApplicationContext(), getString(R.string.forget_name), Toast.LENGTH_SHORT, R.style.mytoast).show();
                     return;
                 }
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), R.string.forget_mail, Toast.LENGTH_SHORT).show();
+                    StyleableToast.makeText(getApplicationContext(), getString(R.string.forget_mail), Toast.LENGTH_SHORT, R.style.mytoast).show();
                     return;
                 }
 
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), R.string.forget_password, Toast.LENGTH_SHORT).show();
+                    StyleableToast.makeText(getApplicationContext(), getString(R.string.forget_password), Toast.LENGTH_SHORT, R.style.mytoast).show();
                     return;
                 }
 
                 if (password.length() < 6) {
-                    Toast.makeText(getApplicationContext(), R.string.password_short, Toast.LENGTH_SHORT).show();
+                    StyleableToast.makeText(getApplicationContext(), getString(R.string.password_short), Toast.LENGTH_SHORT, R.style.mytoast).show();
                     return;
                 }
 
@@ -98,14 +101,12 @@ public class RegisterActivity extends AppCompatActivity {
                         .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                Toast.makeText(RegisterActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
-
                                 // If sign in fails, display a message to the user. If sign in succeeds
                                 // the auth state listener will be notified and logic to handle the
                                 // signed in user can be handled in the listener.
                                 if (!task.isSuccessful()) {
-                                    Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(),
-                                            Toast.LENGTH_SHORT).show();
+                                    StyleableToast.makeText(RegisterActivity.this, getString(R.string.fail_authentication) + task.getException(),
+                                            Toast.LENGTH_SHORT, R.style.mytoast).show();
                                 } else {
 
                                     //ADD THE NAME IN THE DB
@@ -117,11 +118,10 @@ public class RegisterActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
 
-                                            Toast.makeText(RegisterActivity.this, R.string.username_inserted_in_db, Toast.LENGTH_LONG).show();
 
                                         }
                                     });
-
+                                    StyleableToast.makeText(getBaseContext(),getString(R.string.welcome_toast_message),Toast.LENGTH_SHORT, R.style.mytoast).show();
                                     startActivity(new Intent(RegisterActivity.this, JokesFeed.class));
                                     finish();
                                 }
@@ -133,15 +133,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-
-
-
-
-
-
-
-
-
+    public void checkInternetMethod(){
+        checkInternet = new CheckInternet(this);
+        checkInternet.execute();
+    }
 
 
     }

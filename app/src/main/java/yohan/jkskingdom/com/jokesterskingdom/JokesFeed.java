@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 public class JokesFeed extends AppCompatActivity {
 
+    CheckInternet checkInternet;
+
 
     private FloatingActionButton fabAddJoke;
 
@@ -29,9 +31,8 @@ public class JokesFeed extends AppCompatActivity {
 
         fabAddJoke = findViewById(R.id.floatingActionButton);
 
-
-
-
+        //CHECK IF INTERNET WITH ASYNCTASK
+        checkInternetMethod();
 
 
         //AFFICHE LE FRAGMENT DU JOKES FEED DES LE DEBUT
@@ -42,6 +43,8 @@ public class JokesFeed extends AppCompatActivity {
         fabAddJoke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //CHECK IF INTERNET WITH ASYNCTASK
+                checkInternetMethod();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new AddJokeFragment()).commit();
             }
@@ -64,9 +67,13 @@ public class JokesFeed extends AppCompatActivity {
 
                     switch (item.getItemId()) {
                         case R.id.nav_profile:
+                            //CHECK IF INTERNET WITH ASYNCTASK
+                            checkInternetMethod();
                             selectedFragment = new ProfileFragment();
                             break;
                         case R.id.nav_feed:
+                            //CHECK IF INTERNET WITH ASYNCTASK
+                            checkInternetMethod();
                             selectedFragment = new JokesFeedFragment();
                             break;
 
@@ -77,13 +84,17 @@ public class JokesFeed extends AppCompatActivity {
 
                     return true;
 
+
+
                 }
             };
 
 
 
-
-
+    public void checkInternetMethod(){
+        checkInternet = new CheckInternet(this);
+        checkInternet.execute();
+    }
 
 
 

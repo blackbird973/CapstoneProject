@@ -28,6 +28,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -98,7 +99,7 @@ public class AddJokeFragment extends Fragment implements View.OnClickListener {
 
                                     if(task.isSuccessful()){
 
-                                        Toast.makeText(getActivity(), "Joke was added to the Kingdom :)", Toast.LENGTH_SHORT).show();
+                                        StyleableToast.makeText(getActivity(), getString(R.string.add_joke_success), Toast.LENGTH_SHORT, R.style.mytoast).show();
                                         //BRING BACK THE USER TO THE JOKES FEED FRAGMENT
                                         JokesFeedFragment newFragment = new JokesFeedFragment();
                                         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -108,7 +109,7 @@ public class AddJokeFragment extends Fragment implements View.OnClickListener {
 
 
                                     }else{
-                                        Toast.makeText(getActivity(), "Error uploading the Joke, Maybe internet ?", Toast.LENGTH_SHORT).show();
+                                        StyleableToast.makeText(getActivity(), getString(R.string.add_joke_error), Toast.LENGTH_SHORT, R.style.mytoast).show();
                                     }
 
 
@@ -116,7 +117,7 @@ public class AddJokeFragment extends Fragment implements View.OnClickListener {
                             });
                         }
                         else{
-                            Toast.makeText(getActivity(),"Bro, you can't share an empty joke w/ da Kingdom !",Toast.LENGTH_SHORT).show();
+                            StyleableToast.makeText(getActivity(),getString(R.string.add_joke_empty_joke),Toast.LENGTH_SHORT, R.style.mytoast).show();
                         }
 
 

@@ -1,5 +1,6 @@
 package yohan.jkskingdom.com.jokesterskingdom;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -16,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -23,11 +25,16 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private TextView goToRegister;
     private FirebaseAuth auth;
+    CheckInternet checkInternet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //CHECK IF INTERNET WITH ASYNCTASK
+        checkInternetMethod();
+
 
         auth = FirebaseAuth.getInstance();
         inputEmail = (TextInputLayout) findViewById(R.id.textInputLayout2);
@@ -83,11 +90,12 @@ public class LoginActivity extends AppCompatActivity {
                                 if (!task.isSuccessful()) {
                                     // there was an error
                                     if (password.length() < 6) {
-                                        inputPassword.setError("Password too short.");
+                                        inputPassword.setError(getString(R.string.password_short));
                                     } else {
                                         Toast.makeText(LoginActivity.this, R.string.fail_authentication, Toast.LENGTH_SHORT).show();
                                     }
                                 } else {
+                                    StyleableToast.makeText(getBaseContext(), getString(R.string.welcome_toast_message),Toast.LENGTH_SHORT, R.style.mytoast).show();
                                     Intent intent = new Intent(LoginActivity.this, JokesFeed.class);
                                     startActivity(intent);
                                     finish();
@@ -99,4 +107,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
+    public void checkInternetMethod(){
+        checkInternet = new CheckInternet(this);
+        checkInternet.execute();
+    }
+
 }

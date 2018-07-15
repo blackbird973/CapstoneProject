@@ -13,10 +13,10 @@
         android:layout_height="50dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="110dp"
-        android:contentDescription="@string/username_background_profile_fragment"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/custom_textinput" />
+        app:srcCompat="@drawable/custom_textinput"
+        tools:ignore="ContentDescription"/>
 
     <TextView
         android:id="@+id/tv_name"
