@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'MyAndroidKey'
             keyPassword '#wxdPw3qF@'
-            storeFile file('C:/Users/Yohan/Desktop/Capstone 1/Jokesters Kingdom/keystore.jks')
+            storeFile file("$rootDir/keystore.jks")
             storePassword '#wxdPw3qF@'
         }
     }
@@ -14,6 +14,7 @@ android {
         applicationId "yohan.jkskingdom.com.jokesterskingdom"
         minSdkVersion 21
         targetSdkVersion 27
+        multiDexEnabled true
         versionCode 1
         versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

@@ -1,6 +1,5 @@
 package yohan.jkskingdom.com.jokesterskingdom;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,18 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -70,8 +63,8 @@ public class AddJokeFragment extends Fragment implements View.OnClickListener {
 
     //LOGOUT THE USER FROM FIREBASE AND BRING BACK THE USER TO THE LOGIN ACTIVITY
     @Override
-    public void onClick(View v ) {
-        switch (v.getId()){
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.buttonAddJoke:
 
 
@@ -85,19 +78,19 @@ public class AddJokeFragment extends Fragment implements View.OnClickListener {
 
                         String joke = inputJoke.getEditText().getText().toString();
 
-                        if(!TextUtils.isEmpty(joke)){
+                        if (!TextUtils.isEmpty(joke)) {
                             //ADD ALL INFOS  INTO THE MAP AND POST THIS MAP IN THE FIRESTORE COLLECTION
                             Map<String, Object> postMap = new HashMap<>();
-                            postMap.put("joke",inputJoke.getEditText().getText().toString());
-                            postMap.put("user_id",uid);
+                            postMap.put("joke", inputJoke.getEditText().getText().toString());
+                            postMap.put("user_id", uid);
                             postMap.put("timestamp", FieldValue.serverTimestamp());
-                            postMap.put("username",username);
+                            postMap.put("username", username);
 
                             firebaseFirestore.collection("Jokes").add(postMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentReference> task) {
 
-                                    if(task.isSuccessful()){
+                                    if (task.isSuccessful()) {
 
                                         StyleableToast.makeText(getActivity(), getString(R.string.add_joke_success), Toast.LENGTH_SHORT, R.style.mytoast).show();
                                         //BRING BACK THE USER TO THE JOKES FEED FRAGMENT
@@ -108,27 +101,20 @@ public class AddJokeFragment extends Fragment implements View.OnClickListener {
                                         fragmentTransaction.commit();
 
 
-                                    }else{
+                                    } else {
                                         StyleableToast.makeText(getActivity(), getString(R.string.add_joke_error), Toast.LENGTH_SHORT, R.style.mytoast).show();
                                     }
 
 
                                 }
                             });
+                        } else {
+                            StyleableToast.makeText(getActivity(), getString(R.string.add_joke_empty_joke), Toast.LENGTH_SHORT, R.style.mytoast).show();
                         }
-                        else{
-                            StyleableToast.makeText(getActivity(),getString(R.string.add_joke_empty_joke),Toast.LENGTH_SHORT, R.style.mytoast).show();
-                        }
-
 
 
                     }
                 });
-
-
-
-
-
 
 
         }

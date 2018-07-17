@@ -117,7 +117,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/croix_rouge_v3" />
+                app:srcCompat="@drawable/croix_rouge_purple" />
 
         </android.support.constraint.ConstraintLayout>
 

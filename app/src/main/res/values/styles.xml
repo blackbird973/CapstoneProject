@@ -19,8 +19,10 @@
         <item name="strokeColor">@color/magicPurple</item>
         <item name="iconStart">@drawable/logo_ready</item>
         <item name="iconEnd">@drawable/logo_ready</item>
-        <item name="length">LONG</item> LONG or SHORT
-        <item name="gravity">center</item> top or center
+        <item name="length">LONG</item>
+        LONG or SHORT
+        <item name="gravity">center</item>
+        top or center
         <item name="radius">5dp</item>
     </style>
 

@@ -36,7 +36,7 @@
         app:layout_constraintTop_toTopOf="@+id/view"
         app:layout_constraintVertical_bias="0.555"
         app:srcCompat="@drawable/logo_app"
-        tools:ignore="ContentDescription"/>
+        tools:ignore="ContentDescription" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout2"
@@ -134,7 +134,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/curve"
-        tools:ignore="ContentDescription"/>
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/textView2"
@@ -176,8 +176,9 @@
             android:singleLine="false"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:maxLength="10"/>
-            <requestFocus />
-        </android.support.design.widget.TextInputLayout>
+            android:maxLength="10" />
+
+        <requestFocus />
+    </android.support.design.widget.TextInputLayout>
 
 </android.support.constraint.ConstraintLayout>

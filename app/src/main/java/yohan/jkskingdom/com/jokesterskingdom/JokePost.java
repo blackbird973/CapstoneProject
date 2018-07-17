@@ -1,16 +1,18 @@
 package yohan.jkskingdom.com.jokesterskingdom;
 
 import java.util.Date;
+
 /**
  * Created by Yohan on 30/06/2018.
  */
 
-public class JokePost extends JokePostId{
+public class JokePost extends JokePostId {
 
-    public  String user_id, joke, username;
+    public String user_id, joke, username;
     public Date timestamp;
 
-    public JokePost(){}
+    public JokePost() {
+    }
 
     public JokePost(String user_id, String joke, String username, Date timestamp) {
         this.user_id = user_id;
@@ -51,8 +53,6 @@ public class JokePost extends JokePostId{
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
-
-
 
 
 }

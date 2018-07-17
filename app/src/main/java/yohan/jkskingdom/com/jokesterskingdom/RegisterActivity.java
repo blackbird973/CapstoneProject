@@ -1,7 +1,5 @@
 package yohan.jkskingdom.com.jokesterskingdom;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,12 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
@@ -39,9 +36,6 @@ public class RegisterActivity extends AppCompatActivity {
     CheckInternet checkInternet;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +44,11 @@ public class RegisterActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
-        inputEmail =  findViewById(R.id.textInputLayout2);
-        inputPassword =  findViewById(R.id.textInputLayout3);
-        inputName =  findViewById(R.id.textInputLayoutName);
-        btnRegister =  findViewById(R.id.button);
-        goToLogin =  findViewById(R.id.textView2);
+        inputEmail = findViewById(R.id.textInputLayout2);
+        inputPassword = findViewById(R.id.textInputLayout3);
+        inputName = findViewById(R.id.textInputLayoutName);
+        btnRegister = findViewById(R.id.button);
+        goToLogin = findViewById(R.id.textView2);
 
 
         //CHECK IF INTERNET WITH ASYNCTASK
@@ -110,8 +104,8 @@ public class RegisterActivity extends AppCompatActivity {
                                 } else {
 
                                     //ADD THE NAME IN THE DB
-                                    Map<String , Object> userMap = new HashMap<>();
-                                    userMap.put("username",username);
+                                    Map<String, Object> userMap = new HashMap<>();
+                                    userMap.put("username", username);
 
 
                                     firebaseFirestore.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -121,7 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                         }
                                     });
-                                    StyleableToast.makeText(getBaseContext(),getString(R.string.welcome_toast_message),Toast.LENGTH_SHORT, R.style.mytoast).show();
+                                    StyleableToast.makeText(getBaseContext(), getString(R.string.welcome_toast_message), Toast.LENGTH_SHORT, R.style.mytoast).show();
                                     startActivity(new Intent(RegisterActivity.this, JokesFeed.class));
                                     finish();
                                 }
@@ -133,13 +127,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    public void checkInternetMethod(){
+    public void checkInternetMethod() {
         checkInternet = new CheckInternet(this);
         checkInternet.execute();
     }
 
 
-    }
+}
 
 
 

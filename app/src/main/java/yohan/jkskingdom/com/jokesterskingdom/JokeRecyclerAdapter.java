@@ -16,8 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.support.v4.app.Fragment;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -42,7 +41,8 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
 
     public List<JokePost> joke_list;
     public Context context;
-    public JokeRecyclerAdapter(List<JokePost> joke_list){
+
+    public JokeRecyclerAdapter(List<JokePost> joke_list) {
 
         this.joke_list = joke_list;
     }
@@ -96,18 +96,20 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
         context.sendBroadcast(addressWidget);
 
 
-
-
         //RETRIEVE THE USERNAME TEXT
         String username_data = joke_list.get(position).getUsername();
         holder.setUsernameText(username_data);
+
         //RETRIEVE TIME OF THE POSTED JOKE
-        final long millisecond = joke_list.get(position).getTimestamp().getTime();
-        String dateString = DateFormat.format("dd/MM/yyyy", new Date(millisecond)).toString();
-        holder.setTime(dateString);
+        if(joke_list.get(position).getTimestamp() != null) {
+            final long millisecond = joke_list.get(position).getTimestamp().getTime();
+            String dateString = DateFormat.format("dd/MM/yyyy", new Date(millisecond)).toString();
+            holder.setTime(dateString);
+        }
+
         //MAKE THE DELETE OPTION ONLY FOR LOGGED USERS POST
         String joke_user_id = joke_list.get(position).getUser_id();
-        if(joke_user_id.equals(currentUserId)){
+        if (joke_user_id.equals(currentUserId)) {
 
             holder.deleteJokeBtn.setVisibility(View.VISIBLE);
 
@@ -138,7 +140,7 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
 
                                         //REFRESH THE RECYCLERVIEW SO THAT THE DELETE JOKE ITEM DISAPEAR
                                         final String last_joke_new = joke_list.get(0).getJoke();
-                                        
+
                                         SharedPreferences preferences = context.getSharedPreferences("Jokes", Context.MODE_PRIVATE);
                                         SharedPreferences.Editor editor = preferences.edit();
                                         editor.putString("Jokes", last_joke_new);
@@ -163,7 +165,7 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
                             }
                         });
 
-                alertDialogBuilder.setNegativeButton(R.string.alert_dialog_no,new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setNegativeButton(R.string.alert_dialog_no, new DialogInterface.OnClickListener() {
                     //IF THE USER CLICK "NO" THE JOKE IS NOT DELETED
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -183,9 +185,9 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
             @Override
             public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
 
-                if(documentSnapshots != null) {
+                if (documentSnapshots != null) {
 
-                    if(!documentSnapshots.isEmpty()){
+                    if (!documentSnapshots.isEmpty()) {
 
                         int count = documentSnapshots.size();
                         holder.updateLikesCount(count);
@@ -194,7 +196,8 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
 
                         holder.updateLikesCount(0);
 
-                    }}
+                    }
+                }
 
             }
         });
@@ -205,9 +208,9 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
             @Override
             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
 
-                if(documentSnapshot != null) {
+                if (documentSnapshot != null) {
 
-                    if(documentSnapshot.exists()){
+                    if (documentSnapshot.exists()) {
 
                         holder.jokeLikeBtn.setImageDrawable(context.getDrawable(R.mipmap.action_like_purple));
 
@@ -215,7 +218,8 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
 
                         holder.jokeLikeBtn.setImageDrawable(context.getDrawable(R.mipmap.action_like_grey));
 
-                    }}
+                    }
+                }
 
             }
         });
@@ -229,7 +233,7 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                        if(!task.getResult().exists()){
+                        if (!task.getResult().exists()) {
                             Map<String, Object> likesMap = new HashMap<>();
                             likesMap.put("timestamp", FieldValue.serverTimestamp());
 
@@ -251,7 +255,7 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
         return joke_list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private View mview;
 
@@ -273,27 +277,27 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
             deleteJokeBtn = mview.findViewById(R.id.croix_btn);
         }
 
-        public void setJokeText(String jokeText){
+        public void setJokeText(String jokeText) {
 
             jokeView = mview.findViewById(R.id.tv_joke);
             jokeView.setText(jokeText);
 
         }
 
-        public void setUsernameText(String usernameText){
+        public void setUsernameText(String usernameText) {
 
             usernameView = mview.findViewById(R.id.tv_username);
             usernameView.setText(usernameText);
         }
 
-        public void setTime(String date){
+        public void setTime(String date) {
 
             jokeDate = mview.findViewById(R.id.tv_date);
             jokeDate.setText(date);
 
         }
 
-        public void updateLikesCount(int count){
+        public void updateLikesCount(int count) {
 
             jokeLikeCount = mview.findViewById(R.id.joke_like_count);
             jokeLikeCount.setText(String.valueOf(count));

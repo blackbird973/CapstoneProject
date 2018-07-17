@@ -38,4 +38,5 @@
     <string name="alert_dialog_asynctask_opensettings">Okay lets put my internet ON</string>
     <string name="alert_dialog_asynctask_leaveapp">Then i will quit !</string>
     <string name="content_description_first_gradient">First Gradient in Background</string>
+    <string name="content_desc_FAB">This is the button to write a new joke</string>
 </resources>

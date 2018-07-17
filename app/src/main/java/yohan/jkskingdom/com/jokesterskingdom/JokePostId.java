@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
  * Created by Yohan on 11/07/2018.
  */
 
-public class JokePostId{
+public class JokePostId {
 
     @Exclude
     public String JokePostId;

@@ -1,11 +1,10 @@
 package yohan.jkskingdom.com.jokesterskingdom;
 
-import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -51,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //CHECK IF USER ALREADY LOGGED IN  AND TAKE HIM DIRECTLY TO THE JOKES FEED IF ALREADY LOGGED IN
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user!=null){
+        if (user != null) {
 
             Intent intent = new Intent(LoginActivity.this, JokesFeed.class);
             startActivity(intent);
@@ -59,14 +58,12 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-
-
         //LOGIN THE USER WITH FIREBASE
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 String email = inputEmail.getEditText().getText().toString().trim();
-                 final String password = inputPassword.getEditText().getText().toString().trim();
+                String email = inputEmail.getEditText().getText().toString().trim();
+                final String password = inputPassword.getEditText().getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), R.string.forget_mail, Toast.LENGTH_SHORT).show();
@@ -95,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(LoginActivity.this, R.string.fail_authentication, Toast.LENGTH_SHORT).show();
                                     }
                                 } else {
-                                    StyleableToast.makeText(getBaseContext(), getString(R.string.welcome_toast_message),Toast.LENGTH_SHORT, R.style.mytoast).show();
+                                    StyleableToast.makeText(getBaseContext(), getString(R.string.welcome_toast_message), Toast.LENGTH_SHORT, R.style.mytoast).show();
                                     Intent intent = new Intent(LoginActivity.this, JokesFeed.class);
                                     startActivity(intent);
                                     finish();
@@ -108,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void checkInternetMethod(){
+    public void checkInternetMethod() {
         checkInternet = new CheckInternet(this);
         checkInternet.execute();
     }

@@ -18,11 +18,11 @@ public class WidgetProvider extends AppWidgetProvider {
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_provider);
 
-        SharedPreferences preferences = context.getSharedPreferences("Jokes",Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences("Jokes", Context.MODE_PRIVATE);
 
         String last_joke_retreive = preferences.getString("Jokes", "no jokes found");
 
-        views.setTextViewText(R.id.widget_joke,String.valueOf(last_joke_retreive));
+        views.setTextViewText(R.id.widget_joke, String.valueOf(last_joke_retreive));
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

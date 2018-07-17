@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 /**
  * Created by Yohan on 29/06/2018.
@@ -36,8 +35,8 @@ public class JokesFeed extends AppCompatActivity {
 
 
         //AFFICHE LE FRAGMENT DU JOKES FEED DES LE DEBUT
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new JokesFeedFragment()).commit();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                //new JokesFeedFragment()).commit();
 
         //START FRAGMENT ON CLICK OF THE FAB
         fabAddJoke.setOnClickListener(new View.OnClickListener() {
@@ -51,11 +50,16 @@ public class JokesFeed extends AppCompatActivity {
         });
 
 
-
+        //SAVE FRAGMENTS STATE
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container,
+                            new JokesFeedFragment())
+                    .commit();
+        }
 
 
     }
-
 
 
     //AFFICHE LES FRAGMENT CORRESPONDANT A CHAQUE CLIQUE SUR DES ITEM DE LA NAVBAR
@@ -85,18 +89,14 @@ public class JokesFeed extends AppCompatActivity {
                     return true;
 
 
-
                 }
             };
 
 
-
-    public void checkInternetMethod(){
+    public void checkInternetMethod() {
         checkInternet = new CheckInternet(this);
         checkInternet.execute();
     }
-
-
 
 
 }
