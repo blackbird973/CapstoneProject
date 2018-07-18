@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,20 +38,13 @@ public class JokesFeedFragment extends Fragment {
     List<JokePost> joke_list;
     FirebaseFirestore firebaseFirestore;
     JokeRecyclerAdapter jokeRecyclerAdapter;
-
-
-
-
+    private static final String TAG = "MyActivity";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_jokesfeed, container, false);
-
-
         joke_list = new ArrayList<>();
-
         mJokeList = v.findViewById(R.id.joke_recycler_view);
-
         jokeRecyclerAdapter = new JokeRecyclerAdapter(joke_list);
         mJokeList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mJokeList.setAdapter(jokeRecyclerAdapter);
@@ -59,8 +53,6 @@ public class JokesFeedFragment extends Fragment {
         StaggeredGridLayoutManager mStaggeredVerticalLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mJokeList.setLayoutManager(mStaggeredVerticalLayoutManager);
         //JUST REMOVE THE 3 LINES ABOVE IF YOU WANT TO RETURN BACK TO THE  SIMPLE ONE LINE PER ITEM DISPLAY
-
-
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         //ORDER JOKES POST BY MOST RECENT DATE
@@ -83,29 +75,20 @@ public class JokesFeedFragment extends Fragment {
                             joke_list.add(jokePost);
 
                             jokeRecyclerAdapter.notifyDataSetChanged();
-
                         }
-
-
-
                     }
                 }
-
-            }
-        });
-
+            }});
         //RESTORE RC SCROLL POSITION
-      if (savedInstanceState != null){
-          int pos_last = savedInstanceState.getInt("joke_pos");
+        if (savedInstanceState != null){
+            int pos_last = savedInstanceState.getInt("joke_pos");
 
-          if(pos_last != RecyclerView.NO_POSITION) {
-              mJokeList.scrollToPosition(pos_last);
-          }
-      }
-
-
+            if(pos_last != RecyclerView.NO_POSITION) {
+                mJokeList.smoothScrollToPosition(pos_last);
+                Log.d("voici la sortie", String.valueOf(pos_last));
+            }
+        }
         return v;
-
     }
 
    @Override
