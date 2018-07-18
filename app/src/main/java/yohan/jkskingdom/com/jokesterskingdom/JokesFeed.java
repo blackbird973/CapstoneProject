@@ -17,7 +17,6 @@ public class JokesFeed extends AppCompatActivity {
 
     CheckInternet checkInternet;
 
-
     private FloatingActionButton fabAddJoke;
 
     @Override
@@ -33,11 +32,6 @@ public class JokesFeed extends AppCompatActivity {
         //CHECK IF INTERNET WITH ASYNCTASK
         checkInternetMethod();
 
-
-        //AFFICHE LE FRAGMENT DU JOKES FEED DES LE DEBUT
-        //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                //new JokesFeedFragment()).commit();
-
         //START FRAGMENT ON CLICK OF THE FAB
         fabAddJoke.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,8 +42,6 @@ public class JokesFeed extends AppCompatActivity {
                         new AddJokeFragment()).commit();
             }
         });
-
-
         //SAVE FRAGMENTS STATE
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -57,6 +49,8 @@ public class JokesFeed extends AppCompatActivity {
                             new JokesFeedFragment())
                     .commit();
         }
+
+
 
 
     }
@@ -97,6 +91,12 @@ public class JokesFeed extends AppCompatActivity {
         checkInternet = new CheckInternet(this);
         checkInternet.execute();
     }
+
+
+
+
+
+
 
 
 }

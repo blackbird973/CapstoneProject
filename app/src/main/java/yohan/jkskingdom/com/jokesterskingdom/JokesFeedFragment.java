@@ -1,6 +1,7 @@
 package yohan.jkskingdom.com.jokesterskingdom;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.support.v4.app.Fragment;
+import android.widget.TextView;
 
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -36,6 +39,9 @@ public class JokesFeedFragment extends Fragment {
     JokeRecyclerAdapter jokeRecyclerAdapter;
 
 
+
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_jokesfeed, container, false);
@@ -49,10 +55,11 @@ public class JokesFeedFragment extends Fragment {
         mJokeList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mJokeList.setAdapter(jokeRecyclerAdapter);
         //STAGERED THE RECYCLER VIEW (2 COLUMNS LIKE LEBONCOIN)
-        mJokeList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        StaggeredGridLayoutManager mStaggeredVerticalLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mJokeList.setLayoutManager(mStaggeredVerticalLayoutManager);
+        //mJokeList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //StaggeredGridLayoutManager mStaggeredVerticalLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        //mJokeList.setLayoutManager(mStaggeredVerticalLayoutManager);
         //JUST REMOVE THE 3 LINES ABOVE IF YOU WANT TO RETURN BACK TO THE  SIMPLE ONE LINE PER ITEM DISPLAY
+
 
 
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -85,8 +92,27 @@ public class JokesFeedFragment extends Fragment {
             }
         });
 
+        //RESTORE RC SCROLL POSITION
+        if (savedInstanceState != null){
+
+            int pos_last = savedInstanceState.getInt("joke_pos");
+            mJokeList.scrollToPosition(pos_last);
+
+        }
+
 
         return v;
+
     }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("joke_pos", ((LinearLayoutManager) mJokeList.getLayoutManager()).findFirstCompletelyVisibleItemPosition());
+
+        //SAVE RC SCROLL POSITION
+    }
+
 
 }

@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,6 +40,7 @@ public class AddJokeFragment extends Fragment implements View.OnClickListener {
     FirebaseUser user;
     String uid;
     TextInputLayout inputJoke;
+    EditText editText;
 
     public AddJokeFragment() {
         // Required empty public constructor
@@ -51,11 +54,19 @@ public class AddJokeFragment extends Fragment implements View.OnClickListener {
         btnSendJoke = v.findViewById(R.id.buttonAddJoke);
         btnSendJoke.setOnClickListener(this);
         inputJoke = v.findViewById(R.id.textInputLayoutJoke);
+        editText = v.findViewById(R.id.edit_text_joke);
         //RETRIEVE THE username OF THE USER AND DISPLAY IT IN THE TEXTVIEW
         //database reference pointing to root of database
         firebaseFirestore = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
+
+        //RESTORE TEXT INPUT ON ORIENATION CHANGE
+        if (savedInstanceState != null){
+        String last = savedInstanceState.getString("jokeContent");
+            editText.setText(last, TextView.BufferType.EDITABLE);
+
+        }
 
         //inflate the fragment for the layout
         return v;
@@ -119,5 +130,20 @@ public class AddJokeFragment extends Fragment implements View.OnClickListener {
 
         }
     }
+
+
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("jokeContent", inputJoke.getEditText().getText().toString());
+    }
+
+
+
+
+
+
 
 }
