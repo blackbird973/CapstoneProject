@@ -93,7 +93,6 @@ public class CheckInternet extends AsyncTask<String, Void, Integer> {
                 });
                 //DISPLAY THE ALERT DIALOG
                 AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.setCancelable(false);
                 alertDialog.setCanceledOnTouchOutside(false);
                 alertDialog.show();
             }
@@ -124,7 +123,6 @@ public class CheckInternet extends AsyncTask<String, Void, Integer> {
             });
             //DISPLAY THE ALERT DIALOG
             AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.setCancelable(false);
             alertDialog.setCanceledOnTouchOutside(false);
             alertDialog.show();
         }
