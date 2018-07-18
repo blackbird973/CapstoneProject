@@ -55,9 +55,9 @@ public class JokesFeedFragment extends Fragment {
         mJokeList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mJokeList.setAdapter(jokeRecyclerAdapter);
         //STAGERED THE RECYCLER VIEW (2 COLUMNS LIKE LEBONCOIN)
-        //mJokeList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //StaggeredGridLayoutManager mStaggeredVerticalLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        //mJokeList.setLayoutManager(mStaggeredVerticalLayoutManager);
+        mJokeList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        StaggeredGridLayoutManager mStaggeredVerticalLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        mJokeList.setLayoutManager(mStaggeredVerticalLayoutManager);
         //JUST REMOVE THE 3 LINES ABOVE IF YOU WANT TO RETURN BACK TO THE  SIMPLE ONE LINE PER ITEM DISPLAY
 
 
@@ -86,6 +86,8 @@ public class JokesFeedFragment extends Fragment {
 
                         }
 
+
+
                     }
                 }
 
@@ -93,26 +95,25 @@ public class JokesFeedFragment extends Fragment {
         });
 
         //RESTORE RC SCROLL POSITION
-        if (savedInstanceState != null){
+      if (savedInstanceState != null){
+          int pos_last = savedInstanceState.getInt("joke_pos");
 
-            int pos_last = savedInstanceState.getInt("joke_pos");
-            mJokeList.scrollToPosition(pos_last);
-
-        }
+          if(pos_last != RecyclerView.NO_POSITION) {
+              mJokeList.scrollToPosition(pos_last);
+          }
+      }
 
 
         return v;
 
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.putInt("joke_pos", ((LinearLayoutManager) mJokeList.getLayoutManager()).findFirstCompletelyVisibleItemPosition());
-
+   @Override
+   public void onSaveInstanceState(@NonNull Bundle outState) {
+      super.onSaveInstanceState(outState);
+      outState.putInt("joke_pos", ((StaggeredGridLayoutManager) mJokeList.getLayoutManager()).findFirstCompletelyVisibleItemPositions(null)[0]);
         //SAVE RC SCROLL POSITION
-    }
+   }
 
 
 }
