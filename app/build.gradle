@@ -31,6 +31,8 @@ android {
 dependencies {
     //third party library : Styleabletoast
     implementation 'com.muddzdev:styleabletoast:2.1.2'
+    //implement custom alert dialog
+    implementation 'com.github.Shashank02051997:FancyAlertDialog-Android:0.1'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:27.1.0'

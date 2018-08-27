@@ -1,11 +1,13 @@
 package yohan.jkskingdom.com.jokesterskingdom;
 
+import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -27,6 +29,10 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.shashank.sony.fancydialoglib.Animation;
+import com.shashank.sony.fancydialoglib.FancyAlertDialog;
+import com.shashank.sony.fancydialoglib.FancyAlertDialogListener;
+import com.shashank.sony.fancydialoglib.Icon;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -114,20 +120,28 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
             holder.deleteJokeBtn.setVisibility(View.VISIBLE);
 
         }
+        else
+            holder.deleteJokeBtn.setVisibility(View.GONE);
 
         //DELETE THE JOKE ON CLICK OF THE TRASH ICON
         holder.deleteJokeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-                alertDialogBuilder.setMessage(R.string.alert_dialog_text);
-                alertDialogBuilder.setPositiveButton(R.string.alert_dialog_yes,
-                        new DialogInterface.OnClickListener() {
+                new FancyAlertDialog.Builder((Activity) context)
+                        .setTitle("Hey you !")
+                        .setBackgroundColor(Color.parseColor("#68A5E2"))  //Don't pass R.color.colorvalue
+                        .setMessage("Do you really want to delete this joke ? It will disappear forever in the blackhole :p")
+                        .setNegativeBtnText("Oops")
+                        .setPositiveBtnBackground(Color.parseColor("#68A5E2"))  //Don't pass R.color.colorvalue
+                        .setPositiveBtnText("Yes")
+                        .setNegativeBtnBackground(Color.parseColor("#FFA9A7A8"))  //Don't pass R.color.colorvalue
+                        .setAnimation(Animation.SLIDE)
+                        .isCancellable(true)
+                        .setIcon(R.drawable.ic_pan_tool_black_24dp, Icon.Visible)
+                        .OnPositiveClicked(new FancyAlertDialogListener() {
                             @Override
-                            //IF THE USER CLICK YES, THEN THE JOKE IS DELETED
-                            public void onClick(DialogInterface arg0, int arg1) {
+                            public void OnClick() {
 
 
                                 firebaseFirestore.collection("Jokes").document(jokePostId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -162,19 +176,16 @@ public class JokeRecyclerAdapter extends RecyclerView.Adapter<JokeRecyclerAdapte
                                     }
                                 });
 
+
                             }
-                        });
-
-                alertDialogBuilder.setNegativeButton(R.string.alert_dialog_no, new DialogInterface.OnClickListener() {
-                    //IF THE USER CLICK "NO" THE JOKE IS NOT DELETED
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                //DISPLAY THE ALERT DIALOG
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+                        })
+                        .OnNegativeClicked(new FancyAlertDialogListener() {
+                            @Override
+                            public void OnClick() {
+                                //FAIT RIEN
+                            }
+                        })
+                        .build();
 
 
             }
