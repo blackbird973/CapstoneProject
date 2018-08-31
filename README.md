@@ -25,3 +25,8 @@ https://www.behance.net/gallery/69642563/App-Design-Udacity-Nanodegree
 
 ![pjimage 3](https://user-images.githubusercontent.com/10677178/44922356-83c6e980-ad45-11e8-9feb-fcc08ab6d6c2.jpg)
 
+I also had to add a widget to the app, it was one my biggest problem to get it working but thanks to the Udacity Community i managed to get it working :)
+
+![pjimage 4](https://user-images.githubusercontent.com/10677178/44922690-59296080-ad46-11e8-8270-0f175f88bc15.jpg)
+
+
