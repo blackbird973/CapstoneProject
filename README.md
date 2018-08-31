@@ -20,3 +20,8 @@ Main Features of the app :
 https://www.behance.net/gallery/69642563/App-Design-Udacity-Nanodegree
 
 ![capstonedesign](https://user-images.githubusercontent.com/10677178/44920227-ab1ab800-ad3f-11e8-947d-02004c5fe489.png)
+
+## After a month coding the app, here is the result :D
+
+![pjimage 3](https://user-images.githubusercontent.com/10677178/44922356-83c6e980-ad45-11e8-9feb-fcc08ab6d6c2.jpg)
+
