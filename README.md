@@ -1,6 +1,12 @@
 # CapstoneProject
 My app "JokestersKingdom" for the final capstone project of the Udacity AND Nanodegree
 
+The aim of my app is to create a community between funny people and jokesters.
+
+Each user will have the ability to share their own jokes to the community which i called the
+"Kingdom" and all these jokes will be displayed together in the “Jokes Feed” of the app
+which will be common to aII the users.
+
 ## Design of the different screens of the app before coding
 
 https://www.behance.net/gallery/69642563/App-Design-Udacity-Nanodegree
